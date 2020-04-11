@@ -1,6 +1,6 @@
 # Reddit Stylesheet Updater
 
-Allows for fetching a sub's stylesheet, editing it in vscode, and updating it.
+Allows for fetching a sub's stylesheet, editing it locally, and sending it back to the server.
 
 This project took me longer than expected, but I'm happy with the result.
 

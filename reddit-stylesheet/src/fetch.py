@@ -6,6 +6,18 @@ Remember to fill out config.yaml!
 import yaml
 import praw
 
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 config = yaml.safe_load(open('config.yaml'))
 
 # adding the 2FA to the password
@@ -28,8 +40,8 @@ subreddit_name = config['options']['subreddit']
 css_contents = reddit.subreddit(subreddit_name).stylesheet()
 
 # writing to the file
-file = open('stylesheet.css', 'w')
+file = open('./fetched/stylesheet.css', 'w')
 file.write(css_contents.stylesheet)
 file.close()
 
-print('Successfully fetched! Check stylesheet.css')
+print(bcolors.OKBLUE + 'Successfully fetched! Check /fetched/stylesheet.css')

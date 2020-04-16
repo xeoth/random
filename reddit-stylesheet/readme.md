@@ -8,16 +8,10 @@ This project took me longer than expected, but I'm happy with the result.
 
 Fill out [config.yaml](./config.yaml) with correct values (you might want to check out the [developed applications](https://www.reddit.com/prefs/apps) page)
 
-Run [fetch.py](./fetch.py) to fetch the stylesheet from the specified subreddit.
-
-Use [Prettier](https://prettier.io/) to lint and format it
-
-Make necessary changes in the newly created stylesheet.css (it's important that you keep the name)
-
-Run [send.py](./send.py) to update the subreddit's stylesheet
+Run [init.py](init.py) and edit [stylesheet.css](./fetched/stylesheet.css). Changes will be uploaded to Reddit every time you save the file.
 
 ## Dependencies
 
 - praw (`pip3 install praw`)
-- requests (`pip3 install requests`)
 - yaml (`pip3 install pyyaml`)
+- watchdog (`pip3 install watchdog`)

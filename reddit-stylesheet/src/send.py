@@ -4,6 +4,18 @@ import praw
 import yaml
 import os
 
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 # initializing values from config.yaml
 config = yaml.safe_load(open('config.yaml'))
 
@@ -27,8 +39,8 @@ reddit = praw.Reddit(
 # actual updating starts here
 subreddit = reddit.subreddit(config['options']['subreddit'])
 
-css_file = open('stylesheet.css', 'r')
+css_file = open('./fetched/stylesheet.css', 'r')
 try:
     subreddit.stylesheet.update(css_file.read())
 except:
-    print('Couldn\'t update the stylesheet. Does stylesheet.css exist?')
+    print(bcolors.FAIL + 'Couldn\'t update the stylesheet. Does stylesheet.css exist?')

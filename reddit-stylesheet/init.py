@@ -45,7 +45,8 @@ class FileChangeHandler(FileSystemEventHandler):
         else:
             self.last_modified = datetime.now()
 
-        print(bcolors.OKGREEN + 'Latest change sent to Reddit successfully.')
+        print(bcolors.OKGREEN + datetime.now().isoformat(timespec='seconds').split('T')[1],
+              'Latest change sent to Reddit successfully.')
         os.system('python3 ./src/send.py')
 
 

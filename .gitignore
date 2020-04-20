@@ -1,3 +1,6 @@
-*.yaml
+# global
 .vscode
-reddit-stylesheet/*.css
+*.yaml
+
+# reddit-stylesheet
+reddit-stylesheet/**/*.css

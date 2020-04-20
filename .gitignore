@@ -1,6 +1,7 @@
 # global
 .vscode
 *.yaml
+node_modules
 
 # reddit-stylesheet
 reddit-stylesheet/**/*.css

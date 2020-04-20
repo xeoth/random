@@ -5,6 +5,7 @@ Remember to fill out config.yaml!
 
 import yaml
 import praw
+import os
 
 
 class bcolors:
@@ -38,6 +39,10 @@ reddit = praw.Reddit(
 subreddit_name = config['options']['subreddit']
 
 css_contents = reddit.subreddit(subreddit_name).stylesheet()
+
+# checking whether dir exists and creating it if not
+if not os.path.isdir('./fetched'):
+    os.mkdir('./fetched')
 
 # writing to the file
 file = open('./fetched/stylesheet.css', 'w')

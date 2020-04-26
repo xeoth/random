@@ -1,9 +1,12 @@
 import os
 import time
 import yaml
-from watchdog.observers import Observer
-from datetime import datetime, timedelta
+import praw
+from src.colors import bcolors
 from watchdog.events import FileSystemEventHandler
+from datetime import datetime, timedelta
+from watchdog.observers import Observer
+from src.fetch import fetch_stylesheet
 
 config = yaml.safe_load(open('config.yaml'))
 
@@ -11,26 +14,35 @@ config = yaml.safe_load(open('config.yaml'))
 def clear(): return os.system('clear')
 
 
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-
-
+# clear screen and display the header
 clear()
-print(bcolors.BOLD + f'Reddit Stylesheet Updater')
+print(bcolors.HEADER + f'Reddit Stylesheet Updater')
+
+# adding the 2FA to the password
+password = config['credentials']['password']
+if config['options']['two_factor_auth']:
+    password += ':' + input(bcolors.ENDC +
+                            'Please enter the 2 factor authentication code: ')
+
+# trying to log in
+reddit = praw.Reddit(
+    client_id=config['credentials']['client_id'],
+    client_secret=config['credentials']['client_secret'],
+    password=password,
+    username=config['credentials']['username'],
+    user_agent='StylesheetUpdater'
+)
+
+
+# display info
 print(
     f'{bcolors.ENDC}Currently working on /r/{config["options"]["subreddit"]}')
 print('Use Ctrl+C to exit')
 print('---')
 
 # fetch stylesheet
-os.system('python3 ./src/fetch.py')
+fetch_stylesheet(reddit, config)
+
 # watch for file changes
 # for each save, send this to reddit
 

@@ -6,7 +6,7 @@ Remember to fill out config.yaml!
 import yaml
 import praw
 import os
-from colors import bcolors
+from src.colors import bcolors
 
 
 def fetch_stylesheet(reddit_instance, config):

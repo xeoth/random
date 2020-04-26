@@ -2,11 +2,12 @@ import os
 import time
 import yaml
 import praw
-from src.colors import bcolors
 from watchdog.events import FileSystemEventHandler
 from datetime import datetime, timedelta
 from watchdog.observers import Observer
 from src.fetch import fetch_stylesheet
+from src.send import send_stylesheet
+from src.colors import bcolors
 
 config = yaml.safe_load(open('config.yaml'))
 
@@ -16,7 +17,7 @@ def clear(): return os.system('clear')
 
 # clear screen and display the header
 clear()
-print(bcolors.HEADER + f'Reddit Stylesheet Updater')
+print(bcolors.HEADER + 'Reddit Stylesheet Updater')
 
 # adding the 2FA to the password
 password = config['credentials']['password']
@@ -59,7 +60,7 @@ class FileChangeHandler(FileSystemEventHandler):
 
         print(bcolors.OKGREEN + datetime.now().isoformat(timespec='seconds').split('T')[1],
               'Latest change sent to Reddit successfully.')
-        os.system('python3 ./src/send.py')
+        send_stylesheet(reddit, config)
 
 
 handler = FileChangeHandler()

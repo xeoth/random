@@ -19,34 +19,33 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-config = yaml.safe_load(open('config.yaml'))
-
 # adding the 2FA to the password
-password = config['credentials']['password']
-if config['options']['two_factor_auth']:
-    password += ':' + input('Please enter the 2 factor authentication code: ')
+# password = config['credentials']['password']
+# if config['options']['two_factor_auth']:
+#     password += ':' + input('Please enter the 2 factor authentication code: ')
 
 
-# trying to log in
-reddit = praw.Reddit(
-    client_id=config['credentials']['client_id'],
-    client_secret=config['credentials']['client_secret'],
-    password=password,
-    username=config['credentials']['username'],
-    user_agent='StylesheetUpdater'
-)
+# # trying to log in
+# reddit = praw.Reddit(
+#     client_id=config['credentials']['client_id'],
+#     client_secret=config['credentials']['client_secret'],
+#     password=password,
+#     username=config['credentials']['username'],
+#     user_agent='StylesheetUpdater'
+# )
 
-subreddit_name = config['options']['subreddit']
+def fetch_stylesheet(reddit_instance, config):
+    subreddit_name = config['options']['subreddit']
 
-css_contents = reddit.subreddit(subreddit_name).stylesheet()
+    css_contents = reddit_instance.subreddit(subreddit_name).stylesheet()
 
-# checking whether dir exists and creating it if not
-if not os.path.isdir('./fetched'):
-    os.mkdir('./fetched')
+    # checking whether dir exists and creating it if not
+    if not os.path.isdir('./fetched'):
+        os.mkdir('./fetched')
 
-# writing to the file
-file = open('./fetched/stylesheet.css', 'w')
-file.write(css_contents.stylesheet)
-file.close()
+    # writing to the file
+    file = open('./fetched/stylesheet.css', 'w')
+    file.write(css_contents.stylesheet)
+    file.close()
 
-print(bcolors.OKBLUE + 'Successfully fetched! Check /fetched/stylesheet.css')
+    print(bcolors.OKBLUE + 'Successfully fetched! Check /fetched/stylesheet.css')

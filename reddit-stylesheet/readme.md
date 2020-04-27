@@ -1,5 +1,7 @@
 # Reddit Stylesheet Updater
 
+![preview of the updater](http://i.imgur.com/6BjkJmR.png)
+
 Allows for fetching a sub's stylesheet, editing it locally, and sending it back to reddit.
 
 This project took me longer than expected, but I'm happy with the result.

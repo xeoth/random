@@ -2,12 +2,14 @@ import os
 import time
 import yaml
 import praw
+from prawcore import exceptions
 from watchdog.events import FileSystemEventHandler
 from datetime import datetime, timedelta
 from watchdog.observers import Observer
 from src.fetch import fetch_stylesheet
 from src.send import send_stylesheet
 from src.colors import bcolors
+from sys import exit
 
 config = yaml.safe_load(open('config.yaml'))
 
@@ -26,6 +28,7 @@ if config['options']['two_factor_auth']:
                             'Please enter the 2 factor authentication code: ')
 
 # trying to log in
+
 reddit = praw.Reddit(
     client_id=config['credentials']['client_id'],
     client_secret=config['credentials']['client_secret'],
@@ -42,7 +45,12 @@ print('Use Ctrl+C to exit')
 print('---')
 
 # fetch stylesheet
-fetch_stylesheet(reddit, config)
+try:
+    fetch_stylesheet(reddit, config)
+except exceptions.OAuthException:
+    print(bcolors.FAIL + 'Wrong credentials! Check config.yaml for any mistakes and make sure you\'re inputting the correct 2FA code (if applicable).')
+    exit(1)
+
 
 # watch for file changes
 # for each save, send this to reddit

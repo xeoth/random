@@ -3,6 +3,10 @@
 *.yaml
 node_modules
 __pycache__
+*.txt
 
 # reddit-stylesheet
 reddit-stylesheet/**/*.css
+
+# discord-chat-logs
+discord-chat-logs/config.json

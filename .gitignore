@@ -2,6 +2,7 @@
 .vscode
 *.yaml
 node_modules
+__pycache__
 
 # reddit-stylesheet
 reddit-stylesheet/**/*.css

@@ -9,12 +9,16 @@ from watchdog.observers import Observer
 from src.fetch import fetch_stylesheet
 from src.send import send_stylesheet
 from src.colors import bcolors
-from sys import exit
+from sys import exit, platform
 
 config = yaml.safe_load(open('config.yaml'))
 
 
-def clear(): return os.system('clear')
+def clear():
+    if platform.startswith('win32'):
+        return os.system('cls')
+    else:
+        return os.system('clear')
 
 
 # clear screen and display the header

@@ -4,6 +4,10 @@
 node_modules
 __pycache__
 *.txt
+.idea/
+target/
+build/
+venv/
 
 # reddit-stylesheet
 reddit-stylesheet/**/*.css

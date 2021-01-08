@@ -3,7 +3,6 @@
 *.yaml
 node_modules
 __pycache__
-*.txt
 .idea/
 target/
 build/
@@ -14,3 +13,4 @@ reddit-stylesheet/**/*.css
 
 # discord-chat-logs
 discord-chat-logs/config.json
+discord-chat-logs/*.txt

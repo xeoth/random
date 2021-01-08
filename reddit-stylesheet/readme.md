@@ -17,3 +17,5 @@ Run [init.py](init.py) and edit [stylesheet.css](./fetched/stylesheet.css). Chan
 - praw (`pip3 install praw`)
 - yaml (`pip3 install pyyaml`)
 - watchdog (`pip3 install watchdog`)
+
+(Or just `pip3 install -r requirements.txt`.)

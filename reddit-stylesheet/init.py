@@ -38,7 +38,7 @@ reddit = praw.Reddit(
     client_secret=config['credentials']['client_secret'],
     password=password,
     username=config['credentials']['username'],
-    user_agent=f'StylesheetUpdater used by u/{config['credentials']['username']}'
+    user_agent=f'StylesheetUpdater used by u/{config["credentials"]["username"]}'
 )
 
 

@@ -6,9 +6,9 @@ Downloads an image from a list of subreddits, then sets is as a wallpaper.
 
 In `main.py`:
 
-`SUBREDDITS` - A tuple with subreddits you want to fetch images from
-`MODE` - Either *random* or *multireddit*. *Random* fetches a picture from one of the specified subreddits, while *multireddit* fetches a picture from every specified subreddit.
-`MIN_HEIGHT`, `MIN_WIDTH` - Minimum height and width of the wallpaper. You should probably set it at your screen resultion.
+* `SUBREDDITS` - A tuple with subreddits you want to fetch images from
+* `MODE` - Either *random* or *multireddit*. *Random* fetches a picture from one of the specified subreddits, while *multireddit* fetches a picture from every specified subreddit.
+* `MIN_HEIGHT`, `MIN_WIDTH` - Minimum height and width of the wallpaper. You should probably set it at your screen resultion.
 
 ## Setting It Up
 

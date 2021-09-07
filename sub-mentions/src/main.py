@@ -31,8 +31,11 @@ FEEDCOMBER_USERNAMES = ("feedcomber-c1",
                         "feedcomber-c4",
                         "feedcomber-c5",
                         "feedcomber-c6",
+                        "feedcomber-p1",
+                        "feedcomber-p2",
+                        "feedcomber-p3",
+                        "feedcomber-p4",
                         "Xeoth")
-
 
 def send_mention(title, comment_url: str):
     comment = reddit.comment(url=comment_url)

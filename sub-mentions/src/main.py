@@ -35,7 +35,6 @@ FEEDCOMBER_USERNAMES = ("feedcomber-c1",
                         "feedcomber-p2",
                         "feedcomber-p3",
                         "feedcomber-p4",
-                        "sub_mentions",
                         "Xeoth")
 
 def send_mention(title, comment_url: str):

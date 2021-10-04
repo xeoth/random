@@ -23,6 +23,7 @@ logging.basicConfig(
 )
 
 link_regex = re.compile(r'\[(?P<title>.+)]\((?P<url>[\w/?=;&]+)\)')
+type_regex = re.compile(r'Type: (?P<type>\w{0,7})')
 
 # tuple with usernames of the feedcomber bots, to prevent abuse.
 FEEDCOMBER_USERNAMES = ("feedcomber-c1",
@@ -38,16 +39,22 @@ FEEDCOMBER_USERNAMES = ("feedcomber-c1",
                         "sub_mentions",
                         "Xeoth")
 
-def send_mention(title, comment_url: str):
-    comment = reddit.comment(url=comment_url)
+def send_mention(title: str, url: str, content_type: str):
+    # we need to grab different stuff depending on whether it's a post or comment
+    if content_type == "post":
+        content = reddit.submission(url=url)
+        body = content.selftext if content.is_self else content.url
+    elif content_type == "comment":
+        content = reddit.comment(url=url)
+
     requests.post(
         url=getenv("SM_WEBHOOK"),
         json={
             "embeds": [
                 {
-                    "title": title,
-                    "description":  "> ".join(("> "+comment.body.lstrip()).splitlines(True)),
-                    "url": comment_url
+                    "title": f"[{content_type}] {title}",
+                    "description":  "> ".join(("> "+content.body.lstrip()).splitlines(True)) if content_type == "comment" else body,
+                    "url": url
                 }
             ]
         }
@@ -63,9 +70,10 @@ if __name__ == '__main__' and not reddit.read_only:
         if match := link_regex.search(message.body):
             # grabbing the URL
             url = match.groupdict()['url']
+            content_type = type_regex.search(message.body).groupdict()['type']
             
             # we have everything we need. send it off to discord!
-            send_mention(message.subject, f"https://reddit.com{url}")
+            send_mention(message.subject, f"https://reddit.com{url}", content_type)
             logging.info(f"Message about https://reddit.com{url} sent")
             
             # we don't need the message anymore and it'd trigger re-sends when the bot restarts, so just delete it
